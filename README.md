@@ -105,18 +105,9 @@ if sentiment_result in ["sadness", "fear", "surprise"]:
 
 ✅ Data embedding and FAISS vector store setup  
 ✅ LangChain RAG pipeline with GPT-4o-mini  
-✅ Sentiment analysis and motivational support  
-🔄 Integration with AWS Lambda for deployment  
-🔜 Frontend development using React.js  
-
----
-
-## 🌿 **Future Plans**  
-
-- Enhance document retrieval with **OpenSearch** for large-scale datasets.  
-- Implement authentication using **AWS Cognito** or **Auth0**.  
-- Develop a user-friendly web app using **React**.  
-- Explore additional languages for multilingual support.  
+✅ Sentiment analysis and motivational support    
+✅ Frontend development using React.js  
+Plan on using AWS Cognita to add user authentication
 
 ---
 
@@ -130,12 +121,7 @@ if sentiment_result in ["sadness", "fear", "surprise"]:
 *🌿 Cancer can be a tough journey, but one's courage and determination will always shine brighter than any challenge faced. There are people who care, and there is always hope for brighter days ahead.*  
 
 ---
-
-## 🚀 **Final Thoughts**  
-
-OncoKnowledge AI is more than just a chatbot — it’s a reliable and compassionate cancer information assistant. By using the power of **LLM + RAG** and incorporating emotional intelligence, it aims to make cancer-related knowledge accessible and supportive for all.  
-
-*Stay strong. Stay informed. Stay hopeful.* 💙  
+  
 ```  
 
 
