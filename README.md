@@ -107,7 +107,7 @@ if sentiment_result in ["sadness", "fear", "surprise"]:
 ✅ LangChain RAG pipeline with GPT-4o-mini  
 ✅ Sentiment analysis and motivational support    
 ✅ Frontend development using React.js  
-Plan on using AWS Cognita to add user authentication
+Plan on using AWS Cognito to add user authentication and store query results in DynamoDB
 
 ---
 
@@ -122,6 +122,5 @@ Plan on using AWS Cognita to add user authentication
 
 ---
   
-```  
 
 
