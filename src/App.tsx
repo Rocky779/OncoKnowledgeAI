@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import {
   Typography, TextField, Button, Box,
-  Paper, ThemeProvider, createTheme, CssBaseline, Fade,
-  useMediaQuery, Tooltip
+  Paper, ThemeProvider, createTheme, CssBaseline, Fade, Tooltip
 } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
 import { motion, AnimatePresence } from 'framer-motion';
+import ReactMarkdown from 'react-markdown';
 
 // Create a custom theme
 const theme = createTheme({
@@ -199,7 +199,7 @@ function App() {
   const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPlaceholder, setShowPlaceholder] = useState(true);
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  //const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
     // Hide placeholder when user starts typing
@@ -210,16 +210,29 @@ function App() {
     }
   }, [question]);
 
-  const handleSubmit =  () => {
+  const handleSubmit = async () => {
     if (!question.trim()) return;
     setLoading(true);
     setAnswer("");
-
-    // Simulate typing effect for the response
-    setTimeout(() => {
-      setLoading(false);
-      const fullResponse = "Based on recent oncology research, I can provide you with detailed information about cancer treatments, prevention strategies, and the latest clinical trials. This response demonstrates how the AI would provide comprehensive, evidence-based information to support healthcare professionals and patients. (This is a simulated response for demonstration purposes.)";
+  
+    try {
+      const response = await fetch('http://127.0.0.1:5000/process-query', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ query: question }),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      
+      // Implement typing effect for the response
       let i = 0;
+      const fullResponse = data.response;
       const typingInterval = setInterval(() => {
         if (i < fullResponse.length) {
           setAnswer(fullResponse.substring(0, i + 1));
@@ -228,8 +241,14 @@ function App() {
           clearInterval(typingInterval);
         }
       }, 20);
-    }, 4000); // Longer delay to show off the loading animation
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setAnswer("Sorry, there was an error processing your request. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
   };
+  
 
   return (
     <ThemeProvider theme={theme}>
@@ -316,10 +335,10 @@ function App() {
                       }}
                     >
                       {[
-                        "What are the latest treatments for melanoma?",
-                        "Explain CAR-T cell therapy",
-                        "Risk factors for pancreatic cancer",
-                        "How does immunotherapy work?"
+                        "What is the role of nutrition during cancer treatment?",
+                        "What are the common symptoms and risk factors for breast cancer?",
+                        "What is life like after luekemia treatment?",
+                        "How does cancer affect vaginal health, and what are the treatments available?"
                       ].map((suggestion, index) => (
                         <Tooltip title="Click to use this suggestion" key={index}>
                           <Button
@@ -344,24 +363,22 @@ function App() {
                 </Box>
               </Fade>
             )}
-
             {/* Display the answer */}
             {answer && (
               <Paper
-                elevation={1}
-                sx={{
-                  p: 3,
-                  mb: 3,
-                  borderRadius: 2,
-                  backgroundColor: 'rgba(63, 81, 181, 0.05)',
-                  borderLeft: '4px solid #3f51b5',
-                }}
-              >
-                <Typography variant="body1" component="div">
+              elevation={1}
+              sx={{
+                p: 3,
+                mb: 3,
+                borderRadius: 2,
+                backgroundColor: 'rgba(63, 81, 181, 0.05)',
+                borderLeft: '4px solid #3f51b5',
+              }}>
+                <ReactMarkdown>
                   {answer}
-                </Typography>
+                </ReactMarkdown>
               </Paper>
-            )}
+              )}
 
             {/* Input area */}
             <Box
