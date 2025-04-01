@@ -337,7 +337,7 @@ function App() {
                       {[
                         "What is the role of nutrition during cancer treatment?",
                         "What are the common symptoms and risk factors for breast cancer?",
-                        "What is life like after luekemia treatment?",
+                        "I just got diagnosed with cancer, and I feel overwhelmed. What are the first steps I should take?",
                         "How does cancer affect vaginal health, and what are the treatments available?"
                       ].map((suggestion, index) => (
                         <Tooltip title="Click to use this suggestion" key={index}>
