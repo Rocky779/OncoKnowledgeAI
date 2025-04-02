@@ -108,6 +108,7 @@ if sentiment_result in ["sadness", "fear", "surprise"]:
 ✅ Sentiment analysis and motivational support    
 ✅ Frontend development using React.js  
 ✅ Storing suery, sentiment and responses in DynamoDB
+
 Plan on using AWS Cognito to add user authentication
 
 ---
