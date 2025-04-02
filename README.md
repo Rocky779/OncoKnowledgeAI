@@ -122,7 +122,9 @@ Plan on using AWS Cognito to add user authentication
 
 *🌿 Cancer can be a tough journey, but one's courage and determination will always shine brighter than any challenge faced. There are people who care, and there is always hope for brighter days ahead.*  
 
----
+---<img width="1425" alt="Screenshot 2025-04-02 at 1 12 02 PM" src="https://github.com/user-attachments/assets/6a1c320a-3952-4541-b11d-60b1ce24f8be" />
+
   
+<img width="1436" alt="Screenshot 2025-04-02 at 1 14 26 PM" src="https://github.com/user-attachments/assets/60fe7c43-7892-4f0f-ae16-cb940e2996bf" />
 
 
