@@ -76,8 +76,7 @@ def process_query(query, data_path="src/dataset"):
     
     # Append motivational message if sentiment is negative
     if is_negative_sentiment:
-        result += " Cancer can be a tough journey, but one's courage and determination will always shine brighter than any challenge faced. The road may be hard, but no one walks it alone. There are people who care, and there is always hope for brighter days ahead."
-    
+        result += " Cancer can be a tough journey, but one's courage and determination will always shine brighter than any challenge faced. The road may be hard, but no one walks it alone. There are people who care, and there is always hope for brighter days ahead. Some days will feel heavier than others, and that’s okay — just remember, you don’t have to be strong all the time to keep going. Even on the hardest days, you're not alone, and better moments are waiting around the corner."
     # Store in DynamoDB
     store_query_data(query, sentiment, result)
 

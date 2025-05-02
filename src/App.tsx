@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useAuth } from "react-oidc-context";
 import {
   Typography, TextField, Button, Box,
   Paper, ThemeProvider, createTheme, CssBaseline, Fade, Tooltip
@@ -7,7 +8,8 @@ import SendIcon from '@mui/icons-material/Send';
 import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
 import { motion, AnimatePresence } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
-
+import SignIn from './SignIn';
+import SignOut from './SignOut';
 // Create a custom theme
 const theme = createTheme({
   palette: {
@@ -81,6 +83,8 @@ const AnimatedLogo = () => (
     >
       OncoKnowledge AI
     </Typography>
+    <SignIn />
+    <SignOut />
   </motion.div>
 );
 
@@ -200,6 +204,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [showPlaceholder, setShowPlaceholder] = useState(true);
   //const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const auth = useAuth();
 
   useEffect(() => {
     // Hide placeholder when user starts typing
@@ -211,19 +216,25 @@ function App() {
   }, [question]);
 
   const handleSubmit = async () => {
+    if (!auth.isAuthenticated) {
+      alert("Please sign in first.");
+      return;
+    }
     if (!question.trim()) return;
     setLoading(true);
     setAnswer("");
   
     try {
+      const token = auth.user?.access_token;
       const response = await fetch('http://127.0.0.1:5000/process-query', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ query: question }),
       });
-  
+      // Check if the response is ok
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`);
       }
